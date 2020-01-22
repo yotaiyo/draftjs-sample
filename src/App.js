@@ -8,11 +8,9 @@ class MyEditor extends React.Component {
       editorState: EditorState.createEmpty()
     };
 
-    this.onChange = (editorState) => {
+    this.onChange = editorState => {
       this.setState({ editorState });
     }
-
-    this.handleKeyCommand = this.handleKeyCommand.bind(this);
   }
 
   handleKeyCommand(command, editorState) {
@@ -26,17 +24,26 @@ class MyEditor extends React.Component {
     return 'not-handled';
   }
 
+  _onBoldClick() {
+    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
+  }
+
+  _onItalicClick() {
+    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'ITALIC'));
+  }
+
   render() {
-    const { editorState } = this.state
 
     return (
-      <>
+      <div>
+        <button onClick={this._onBoldClick.bind(this)}>Bold</button>
+        <button onClick={this._onItalicClick.bind(this)}>Italic</button>
         <Editor
-          editorState={editorState}
+          editorState={this.state.editorState}
           onChange={this.onChange}
           handleKeyCommand={this.handleKeyCommand}
         />
-      </>
+      </div>
     )
   }
 }
