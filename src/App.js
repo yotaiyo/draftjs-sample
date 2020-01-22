@@ -1,5 +1,6 @@
 import React from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
+import { ColorfulEditor } from './ColorfulEditor';
 
 class MyEditor extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class MyEditor extends React.Component {
 
     return (
       <div>
+        <h1>Editor</h1>
         <button onClick={this._onBoldClick.bind(this)}>Bold</button>
         <button onClick={this._onItalicClick.bind(this)}>Italic</button>
         <Editor
@@ -43,6 +45,8 @@ class MyEditor extends React.Component {
           onChange={this.onChange}
           handleKeyCommand={this.handleKeyCommand}
         />
+        <h1>ColorfulEditor</h1>
+        <ColorfulEditor />
       </div>
     )
   }
