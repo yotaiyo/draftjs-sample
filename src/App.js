@@ -12,6 +12,9 @@ class MyEditor extends React.Component {
     this.onChange = editorState => {
       this.setState({ editorState });
     }
+
+    this.setDomEditorRef = ref => this.domEditor = ref;
+    this.focus = () => this.domEditor.focus();
   }
 
   handleKeyCommand(command, editorState) {
@@ -40,11 +43,14 @@ class MyEditor extends React.Component {
         <h1>Editor</h1>
         <button onClick={this._onBoldClick.bind(this)}>Bold</button>
         <button onClick={this._onItalicClick.bind(this)}>Italic</button>
-        <Editor
-          editorState={this.state.editorState}
-          onChange={this.onChange}
-          handleKeyCommand={this.handleKeyCommand}
-        />
+        <div style={{ minHeight: '100px', cursor: 'text' }} onClick={this.focus}>
+          <Editor
+            editorState={this.state.editorState}
+            onChange={this.onChange}
+            handleKeyCommand={this.handleKeyCommand}
+            ref={this.setDomEditorRef}
+          />
+        </div>
         <h1>ColorfulEditor</h1>
         <ColorfulEditor />
       </div>
